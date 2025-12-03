@@ -33,6 +33,20 @@ app.get('/api/items', async (req, res) => {
   }
 })
 
+app.get('/api/users', async (req, res) => {
+  try {
+    if (!db) return res.status(503).json({ error: 'db_not_connected' })
+    const users = await db
+      .collection('users')
+      .find({}, { projection: { passwordHash: 0 } })
+      .limit(50)
+      .toArray()
+    res.json(users)
+  } catch (err) {
+    res.status(500).json({ error: 'db_error' })
+  }
+})
+
 app.post('/api/users', async (req, res) => {
   try {
     if (!db) return res.status(503).json({ error: 'db_not_connected' })
