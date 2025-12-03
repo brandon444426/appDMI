@@ -9,8 +9,8 @@ app.use(cors())
 app.use(bodyParser.json())
 
 const port = process.env.PORT || 3000
-const mongoUri = process.env.MONGODB_URI || process.env.MONGODB_URL || process.env.DATABASE_URL
-const mongoDbName = process.env.MONGODB_DB
+const mongoUri = process.env.MONGODB_URI || process.env.MONGODB_URL || process.env.MONGO_URL || process.env.DATABASE_URL
+const mongoDbName = process.env.MONGODB_DB || process.env.MONGO_DB
 
 let client
 let db
